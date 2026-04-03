@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fraud Detection System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #74ebd5, #acb6e5);
+            text-align: center;
+        }
+        .container {
+            width: 420px;
+            margin: auto;
+            margin-top: 50px;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        input, select {
+            width: 95%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .fraud {
+            color: red;
+        }
+        .safe {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>💳 Fraud Detection System</h2>
+
+    <form action="/predict" method="POST">
+
+        <input type="number" name="amount" placeholder="Transaction Amount" required>
+
+        <input type="number" name="age" placeholder="User Age" required>
+
+        <input type="number" step="0.01" name="velocity" placeholder="Transaction Velocity" required>
+
+        <input type="number" name="time" placeholder="Transaction Time" required>
+        <input type="number" step="0.01" name="device_trust_score" placeholder="Device Trust Score" required>
+        
+        <!-- Merchant Category Dropdown -->
+        <select name="merchant_category" required>
+            <option value="">Select Merchant Category</option>
+            <option value="0">Groceries</option>
+            <option value="1">Electronics</option>
+            <option value="2">Clothing</option>
+            <option value="3">Travel</option>
+            <option value="4">Restaurants</option>
+        </select>
+
+        <!-- Foreign Transaction -->
+        <select name="foreign_transaction" required>
+            <option value="">Foreign Transaction</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+
+        <!-- Location Mismatch -->
+        <select name="location_mismatch" required>
+            <option value="">Location Mismatch</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+
+        
+
+        <button type="submit">🔍 Check Transaction</button>
+
+    </form>
+
+    {% if model_prediction %}
+        <div class="result 
+            {% if model_prediction == 'Fraudulent Transaction' %}fraud{% else %}safe{% endif %}">
+            {{ model_prediction }} <br>
+            Probability: {{ model_probability }}%
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="error">
+            Error: {{ error }}
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
