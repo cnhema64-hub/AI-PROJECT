@@ -1,0 +1,19 @@
+numpy
+tensorflow
+matplotlib
+seaborn
+streamlit
+streamlit-drawable-canvas
+streamlit run app.py
+ctrl+c (end streamlit )
+
+
+..................
+ (demo) PS C:\project_intership\project 5> streamlit run app.py
+streamlit : The term 'streamlit' is not recognized as the name of a cmdlet, function, script file, or operable program. 
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ streamlit run app.py
++ ~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (streamlit:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : ............................  when its come error first you check
